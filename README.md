@@ -13,7 +13,7 @@ tailf datafile | grep ... | awk ... >>outfile
 ```
 
 ```sh
-tailf datafile | catrun mypipe >>outfile
+tailf datafile | node catrun.js mypipe >>outfile
 ```
 
 where the program "mypipe" performs 'grep ... | awk ...'
