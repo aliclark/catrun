@@ -8,12 +8,14 @@ var spawn_prog;
 var spawn_args;
 var stdin;
 var stdout;
+var stderr;
 var hasunpipe;
 
 function resume() {
     if (ch === null) {
         ch = spawn(spawn_prog, spawn_args);
         ch.stdout.pipe(stdout, noend);
+        ch.stderr.pipe(stderr, noend);
         // we will call end() manually
         stdin.pipe(ch.stdin, noend);
         stdin.resume();
@@ -49,6 +51,7 @@ function main() {
     spawn_args = process.argv.slice(3);
     stdin = process.stdin;
     stdout = process.stdout;
+    stderr = process.stderr;
     hasunpipe = (typeof stdin.unpipe) === 'function';
 
     stdin.on('end', end);
